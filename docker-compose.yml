@@ -1,0 +1,22 @@
+version: '3'
+services:
+    postgres:
+        image: postgres
+        ports:
+            - 5432:5432
+    php:
+        build:
+          context: ./docker/php
+        image: php-fpm-custom
+        ports:
+            - 9000:9000
+        volumes:
+            - ./:/var/www/symfony
+    nginx:
+        build:
+          context: ./docker/nginx
+        image: nginx-custom
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www/symfony
